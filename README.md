@@ -12,16 +12,25 @@ Run
 Server:
 Replace -d to -ti to view container output
 ```
-docker run --rm -d -p 8080:8080 -p 5683:5683/udp -p 5684:5684/udp --name leshan-server corfr/leshan server
+docker run --rm -d -p 8080:8080 -p 5683:5683/udp -p 5684:5684/udp --name leshan-server motters/leshan server
 ```
 
 Bootstrap server:
 Replace -d to -ti to view container output
 ```
-docker run --rm -d -p 8081:8081 -p 5783:5783/udp -p 5784:5784/udp --name leshan-bootstrap corfr/leshan bootstrap -- -wp 8081 -lp 5783 -slp 5784
+docker run --rm -d -p 8081:8081 -p 5783:5783/udp -p 5784:5784/udp --name leshan-bootstrap motters/leshan bootstrap -- -wp 8081 -lp 5783 -slp 5784
 ```
 
 You can pass arguments to each service, for instance:
 ```
 docker run ... corfr/leshan server -- -help
+```
+
+Update Docker Hub
+-----------------
+Update docker hub from the git repo folder
+```
+docker build -t motters/leshan .
+docker login
+docker push  motters/leshan .
 ```
